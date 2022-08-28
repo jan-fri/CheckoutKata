@@ -7,7 +7,7 @@ namespace CheckoutKataAppTests
         [TestCase("A", 50)]
         [TestCase("B", 30)]
         [TestCase("C", 20)]
-        [TestCase("D", 10)]
+        [TestCase("D", 15)]
         public void ScanItem_ShouldReturnTotalPrice(string item, int expectedPrice)
         {
             //Arrange
