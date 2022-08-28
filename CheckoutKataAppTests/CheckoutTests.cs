@@ -44,6 +44,11 @@ namespace CheckoutKataAppTests
 
         [TestCase("AAA", 130)]
         [TestCase("BB", 45)]
+        [TestCase("AAAAAA", 260)]
+        [TestCase("AAAA", 180)]
+        [TestCase("BBB", 75)]
+        [TestCase("BAB", 95)]
+        [TestCase("ABCABACCDAB", 330)] // 4*A + 3*B + 4*C + 1*D = 180 + 75 + 60 + 15 = 330
         public void ScanMultipleItems_WhenItemHasSpecialPrice_ThenReturnSpecialPrice(string itemList, int expectedPrice)
         {
             //Arrange
