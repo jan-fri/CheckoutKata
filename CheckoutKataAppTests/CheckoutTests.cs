@@ -63,5 +63,32 @@ namespace CheckoutKataAppTests
             //Assert
             Assert.That(checkout.GetTotalPrice(), Is.EqualTo(expectedPrice));
         }
+
+        [TestCase("AABBB", 145)]
+        public void CalculateTotalPriceUsingNewPricingRules(string itemList, int expectedPrice)
+        {
+            //Arrange
+            var checkout = new Checkout();
+            var newPricing = new Dictionary<string, int>
+            {
+                { "A", 60 },
+                { "B", 20 },
+            };
+
+            var newSpecialPricing = new Dictionary<string, SpecialPrice>
+            {
+                {"A", new SpecialPrice { MinItemsToDiscount = 2, ReducedPrice = 100 } },
+                {"B", new SpecialPrice { MinItemsToDiscount = 3, ReducedPrice = 45 } },
+            };
+
+            //Act
+            foreach (var item in itemList)
+            {
+                checkout.Scan(item.ToString());
+            }
+
+            //Assert
+            Assert.That(checkout.GetTotalPrice(newPricing, newSpecialPricing), Is.EqualTo(expectedPrice));
+        }
     }
 }
