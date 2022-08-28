@@ -18,7 +18,7 @@ namespace CheckoutKataAppTests
             checkout.Scan(item);
 
             //Assert
-            Assert.That(checkout.GetTotalPrice(), Is.EqualTo(expectedPrice));
+            Assert.That(checkout.GetTotalPrice(null, null), Is.EqualTo(expectedPrice));
         }
 
         [TestCase("AB", 80)]
@@ -39,7 +39,7 @@ namespace CheckoutKataAppTests
             }
 
             //Assert
-            Assert.That(checkout.GetTotalPrice(), Is.EqualTo(expectedPrice));
+            Assert.That(checkout.GetTotalPrice(null, null), Is.EqualTo(expectedPrice));
         }
 
         [TestCase("AAA", 130)]
@@ -61,7 +61,7 @@ namespace CheckoutKataAppTests
             }
 
             //Assert
-            Assert.That(checkout.GetTotalPrice(), Is.EqualTo(expectedPrice));
+            Assert.That(checkout.GetTotalPrice(null, null), Is.EqualTo(expectedPrice));
         }
 
         [TestCase("AABBB", 145)]

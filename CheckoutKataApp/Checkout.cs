@@ -4,7 +4,6 @@
     {
         private int _totalPrice = 0;
         private Dictionary<string, int> _itemsAmountRegister = new Dictionary<string, int>();
-
         private Dictionary<string, int> _itemsPriceDictionary = new Dictionary<string, int>
         {
             { "A", 50 },
@@ -12,7 +11,6 @@
             { "C", 20 },
             { "D", 15 }
         };
-
         private Dictionary<string, SpecialPrice> _specialPriceDictionary = new Dictionary<string, SpecialPrice>
         {
             {"A", new SpecialPrice { MinItemsToDiscount = 3, ReducedPrice = 130 } },
@@ -31,8 +29,10 @@
             }        
         }
 
-        public int GetTotalPrice()
+        public int GetTotalPrice(Dictionary<string, int>? itemPricesDict, Dictionary<string, SpecialPrice>? specialPriceDict)
         {
+            CheckIfPricingRulesChanged(itemPricesDict, specialPriceDict);
+
             foreach (var item in _itemsAmountRegister)
             {
                 var itemName = item.Key;
@@ -58,6 +58,19 @@
             }
 
             return _totalPrice;
+        }
+
+        private void CheckIfPricingRulesChanged(Dictionary<string, int>? newItemPrices, Dictionary<string, SpecialPrice>? newSpecialPriceDict)
+        {
+            if (newItemPrices != null)
+            {
+                _itemsPriceDictionary = new Dictionary<string, int>(newItemPrices);
+            }
+
+            if (newSpecialPriceDict != null)
+            {
+                _specialPriceDictionary = new Dictionary<string, SpecialPrice>(newSpecialPriceDict);
+            }
         }
     }
 }
